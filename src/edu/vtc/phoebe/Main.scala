@@ -7,13 +7,13 @@ object Main {
 
   def main(args: Array[String]): Unit = {
     // Analyze the command line.
-    if (args.length != 2) {
+    if (args.length != 1) {
       println("Usage: java -jar Phoebe.jar source-file.pcd")
       System.exit(1)
     }
 
     // Create a stream that reads from the specified file.
-    val input = new ANTLRFileStream(args(1))
+    val input = new ANTLRFileStream(args(0))
 
     // Parse the input file as Ada.
     val lexer  = new PhoebeLexer(input)
