@@ -1,0 +1,18 @@
+#
+# This p-code describes the bubble sort algorithm.
+#
+
+# Short sequences are already sorted.
+IF [the sequence has two or fewer items] THEN RETURN END
+
+REPEAT
+  [set the "done swap" flag to NO]
+  [point at the first two items]
+  WHILE [I am not pointing off the end of the sequence] LOOP
+    IF [the current items are out of order] THEN
+      [swap them]
+      [set the "done swap" flag to YES]
+    END
+    [advance to the next two items (overlapping with the last iteration)]
+  END
+UNTIL [the "done swap" flag is still NO"]

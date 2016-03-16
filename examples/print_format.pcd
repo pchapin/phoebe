@@ -1,0 +1,68 @@
+##########################################################################
+# FILE          : print_format.pcd
+# LAST REVISION : June 28, 1999
+# AUTHOR        : Peter Chapin
+# SUBJECT       : Pseudo code for a print formatting program.
+#
+# (C) Copyright 1999 by Peter Chapin
+#
+# This file contains the p-code for a filter program that will format a
+# file for the printer. It outputs material onto stdout. The user will
+# need to use I/O redirection to send the output to the printer. This is
+# actually a very flexible way to do things.
+#
+# This program truncates long lines so that they will not wrap on the
+# printer.
+#
+# This p-code is well refined and "ripe" for translation to a working
+# program. It is uses a formal notation that I created.
+#
+##########################################################################
+
+FUNCTION [main](VOID) RETURNS int
+  BEGIN
+  
+    # The following define some of the siginificant data objects needed in this program.
+    [Initialize:
+       Page_Number   = 1 (Page we are currently printing on)
+       Column_Number = 1 (Column position that we are about to use)
+       Line_Number   = 1 (Line (on page) we are currently printing on)
+       Top_Of_Page   = YES (=YES when next Ch is first on page)
+       Start_Of_Line = YES (=YES when next Ch is first on line)
+    ]
+    
+    # Loop until we've processed every character in the input file.
+    WHILE [Get a character from the stdin], [it's not EOF] LOOP
+    
+      IF [it's the first character on this page] THEN
+        [print a page header]
+        [set Top_Of_Page to NO to reflect that we've entered this page]
+      END
+      
+      IF [it's the first character on the line] THEN
+        [print a line header (if any)]
+        [Set Start_Of_Line to NO to reflect that we've entered this line]
+      END
+      
+      IF [this character is to be printed
+            (ie not a \n and not off the end of the line)] THEN
+        [print the character]
+        [adjust the column number. Account for tab characters correctly]
+      END
+      
+      IF [the character is a \n] THEN
+        [print the character]
+        [set the column number to 1]
+        [set Start_Of_Line to YES]
+        [advance the line number]
+        IF [line number is larger than the number of lines per page]
+          THEN
+          [print a page footer]
+          [increment the page number]
+          [set Top_Of_Page to YES]
+          [set Line_Number to 1]
+        END
+      END
+    END
+  END
+  

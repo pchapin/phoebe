@@ -1,0 +1,24 @@
+
+[this pseudo-program tests the handling of switch]
+WHILE [Outer condition] LOOP
+  SWITCH [controlling expression]
+    CASE [First case]:
+      [handle first case]
+    END
+    CASE [second case]:
+      SWITCH [inner expression]
+        CASE [first inner case]:
+          [handle first inner case]
+        END
+        CASE [second inner case]:
+          BREAK
+        END
+        CASE [third inner case]:
+          CONTINUE
+        END
+      END  # End if inner SWITCH
+    END  # End of case containing inner SWITCH
+  END  # End of outer SWITCH
+END  # End of enclosing WHILE loop
+
+[loop ended]

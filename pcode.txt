@@ -1,0 +1,380 @@
+
+pchapin's P-Code
+(C) Copyright 2003 by Peter Chapin
+Last Revised: 2003-03-03
+==================================
+
+Introduction
+------------
+
+Pseudo-Code (called p-code from now on) is a stepping stone between a language like English and
+a computer language. P-Code is more formal than English, but does not require you to decided on
+"trivial" details about a computation.
+
+P-code is an excellent software design tool. It allows you to develop a program's logic without
+getting bogged down in detail; yet it gives your design a form that resembles a program, making
+it easier to implement your design than is the case when using other, graphical techniques
+
+The p-code described in this document was developed by myself. It was developed to primarly
+support C/C++ programming; however, it could easily be used to support other languages as well.
+The influence of Ada on the design is apparent.
+
+Although this p-code supports ways of defining both procedures and data, it does not (directly)
+support package level modularity, exception handling, concurrency, abstract data types, or
+object oriented programming. The syntax could be extended on the fly to accommodate some of
+these things. However, it is my feeling that other design techniques may be more appropriate for
+these other levels of software. P-code is best suited for describing the logic of individual
+functions or procedures.
+
+The heart and soul of p-code is the use of normal, English phrases to describe the actions and
+data of a program. These phrases are enclosed in "[ ... ]" pairs to set them off from the formal
+"computer language" text around them. The beauty of p-code is that these English phrases can
+hide any amount of complexity. They allow you to defer difficult problems until you have worked
+out the larger picture.
+
+For example,
+
+     IF [there is more work to do] THEN ...
+     [compress the resulting file]
+     [process the command]
+
+Each of the phrases above is informative and descriptive, but does not require the writer to
+worry about the specifics of the operation suggested. This p-code allows English phrases to be
+as large as necessary, perhaps spanning several lines, as long as they do not contain the ']'
+character anywhere in their text. Notice that we recommend starting an English phrase with a
+lower case letter. This tends to read better in the larger context where the first letter in the
+sentence is really a reserved word (such as "IF" above).
+
+Below is the p-code for a function which does a bubble sort. Notice the use of English phrases
+to add a bit of informality to the presentation and to hide unimportant details. Even the name
+of the function can be deferred by using an English phrase as a description of the function.
+
+     FUNCTION [bubble sort an array of stuff] (
+       [the array in question],
+       [the number of items in the array]
+     ) RETURNS [the sorted array]
+     BEGIN
+       REPEAT
+         FOR [every overlapping pair of elements in the array] LOOP
+           IF [the pair is out of order] THEN
+             [swap them]
+           END
+         END
+       UNTIL [no swapping is necessary]
+     END
+
+P-code does not deal with data types. Instead it deals with descriptions of data items.
+Defining and using appropriate data types is a matter for the implementation of a p-coded
+routine.
+
+Control Structures
+------------------
+
+The function body of a p-code program is written using the following control structures
+
+     * Action statements
+     * FOR ... LOOP ...
+     * WHILE ... LOOP ...
+     * IF ... THEN ... ELSE ...
+     * REPEAT ... UNTIL ...
+     * SWITCH ... CASE ..., etc
+
+Also the BREAK and CONTINUE statements can be used to control loop iterations. You may notice
+that these structures are based on the C language. However, the p-code developed here can be
+used effectively for a variety of languages. Also, since p-code is not a computer language,
+there is no real prohibition against making up your own control structures on the fly. For
+example, you could use an English phrase to simply describe the operation you wish to do rather
+than use one of the control structures defined here.
+
+Action statements are simply English Phrases which describe an action that the program is to
+take. It is these action statements that make up the "meat" of the p-code program.
+
+For example,
+
+     [display window]
+
+     [multiply the matrices]
+
+     [obtain a validated response from the user]
+
+     [print an error message]
+
+Action statements provide "filling" for the other control structures.
+
+The FOR loop construction is used to indicate a loop that will run a number of times where the
+number does not change after the loop is encountered. Usually you will see it with the word
+"each..." For example,
+
+     FOR [each byte in the file] LOOP
+       [process the byte]
+     END
+
+     FOR [each record in the array] LOOP
+       [process the record]
+     END
+
+     FOR [each item on the list] LOOP
+       [process the item]
+     END
+
+The WHILE loop construction is used to indicate a loop that will run an unknown number of times.
+For example, the number of times it runs might depend on the processing that takes place in the
+loop. For example,
+
+     [get the first number]
+     WHILE [the number is not prime] LOOP
+       [work up a new number]
+     END
+
+The IF construction is used to indicate steps that are to be taken conditionally. For example
+
+     IF [the above does not make sense] THEN
+       [perhaps you'd prefer to use flowcharts]
+     END
+
+The IF ... ELSE construction is used to indicate two mutually exclusive options. For example
+
+     IF [there was an error] THEN
+       [do error handling]
+     ELSE
+       [do normal processing]
+     END
+
+This construction can be combined to form a multi-way branch.
+
+     IF [result is too small] THEN
+       [do first kind of error handling]
+     ELSE IF [result is just right] THEN
+       [do normal processing]
+     ELSE
+       [do error handling for the case of result too large]
+     END
+
+The REPEAT..UNTIL loop is a loop where the test is done at the end of the loop rather than at
+the beginning (as with the WHILE loop). This is useful, for example, when interacting with the
+user.
+
+     REPEAT
+       [get and process a user command]
+     UNTIL [user wants to quit]
+
+Notice that the REPEAT..UNTIL loop runs as long as the condition being tested is false. This is
+the opposite of the WHILE loop.
+
+The SWITCH construction is used to specify a multiway branch in a manner that is easier to read
+than an IF ... ELSE IF... chain. The word DEFAULT can be used to specify actions that are taken
+if none of the cases match.
+
+     SWITCH [key stroke entered by user]
+       CASE [space]:
+         [handle space]
+         END
+       CASE [any upper case letter]:
+         [handle letters]
+         END
+       DEFAULT:
+         [handle error]
+         END
+     END
+
+Notice that the word "END" is used after each case to indicate that the case is over. The cases
+do not fall through as they do, for example, in C. This does not present any limitation,
+however, since the English phrases used with the cases can be as complicated as necessary. For
+example
+
+     SWITCH [key stroke entered by user]
+       CASE [upper or lower case leter]:
+         [handle letter]
+         END
+       CASE [digit]:
+         [handle digit]
+         END
+     END
+
+
+Expressions
+-----------
+
+In the condition part of WHILE, REPEAT, and IF constructions additional logical operators are
+possible. These are NOT, AND, and OR. They have the usual meaning.
+
+     IF [you messed up] OR [I messed up] THEN
+       [we have a problem]
+     END
+
+The OR operator has the lowest precedence, followed by AND, and finally NOT. Parens can be used
+to specify ordering. Since programming languages often differ in their precedence of these
+operators, I recommend, in fact, that you use parens liberally in your p-code expressions.
+
+     IF NOT ( [you messed up] OR [I messed up] ) THEN
+       [everything's OK]
+     END
+
+These logical operators cannot be used with a FOR or SWITCH construction.
+
+In the condition part of WHILE, IF, and REPEAT constructions, zero or more actions can proceed
+the conditional part itself. This can be used to indicate certain steps that must be performed
+before the condition can really be evaluated. The ability to include such action lists often
+simplify the structure of a function. This facility is based on the C language comma operator.
+It can be used to express the common C idiom of assigning to a variable as part of the
+evaluation of a condition.
+
+For example,
+
+     WHILE [read line from file], [first character is a space] LOOP
+       [process a block of lines that begin with spaces]
+     END
+
+     IF [there is not enough memory] THEN
+       [print error message]
+     ELSE IF [display window and get response], [bad option] THEN
+       [print a different error message]
+     ELSE
+       [handle user request]
+     END
+
+The BREAK statement forces a immediate exit of the enclosing loop construction. It is often used
+at the beginning of a loop to indicate exceptional reasons for stopping a loop early. For
+example,
+
+     FOR [every byte in the file] LOOP
+       IF [this is a special byte] THEN BREAK END
+       [process normal bytes]
+     END
+
+The CONTINUE statement forces the next iteration of the enclosing loop construction. It is often
+used at the beginning of a loop to indicate that certain passes are to be skipped. For example,
+
+     FOR [every byte in the file] LOOP
+       IF [this is a special byte] THEN CONTINUE END
+       [process normal bytes]
+     END
+
+
+Functions
+---------
+
+Although this p-code is very useful without the formality of creating function definitions there
+are times when a p-code programmer would like to clearly document function interfaces.
+Accordingly this p-code provides a way to do this. Below is a sample function specification
+showing all of the features supported by this pseudo-code. Note that, as with the C language,
+this p-code uses the word FUNCTION to describe any kind of callable block of code. Because of
+the flexibility of p-code, there is no problem using p-code functions to describe procedures or
+methods in languages that support those concepts.
+
+FUNCTION [name of function] REQUIRES [precondition] (
+  [function parameter] DOMAIN [domain constraint description],
+  [another parameter],
+  [yet another parameter]
+  ) PROMISES [postcondition]
+  RETURNS [what it returns], [another] RANGE [range constraint description]
+  BEGIN
+    # Function Body
+  END
+
+Many functions can only be invoked in a certain context. For example, a function may assume that
+a certain graphics package has been initialized, or that some global data is already in a
+certain state. These requirements are often called preconditions. If you want to specify a
+precondition for a function you can use a REQUIRES clause after the function's name.
+
+A function parameter is type description (see below) that specifies the nature of the data sent
+to the function. All data that the function manipulates should be specified in its parameter
+list. It is understood that the implementation of the p-code in a real programming language may
+use other techniques for transmitting the parameters (for example global variables).
+
+The special parameter of VOID may be used to indicate that the function has no parameters.
+
+A function parameter and a type description may have domain constraints. These are descriptions
+of the set of legal values the parameter or type may have. The syntax for domain contraints on
+types does not use the DOMAIN keyword since the term "domain" is more commonly associated with
+functions. However, the meaning of the contraints in both cases are similar.
+
+TYPE [day of the week] IS [some kind of enumeration] : [no weekends]
+
+FUNCTION [position the cursor] (
+  [row and column coordinates] DOMAIN [1..25 for row, 1..80 for column]
+  ) RETURNS VOID
+
+Many data structures have rules that always apply to them (sometimes called "invarients"). These
+rules can be expressed as domain constraints as well. For example,
+
+TYPE [list of file names] IS [list] OF [just strings] :
+  [new names always go on the end]
+
+The postcondition clause is where the function's side effects can be documented. This forms the
+"output" end of the function's context. For example
+
+FUNCTION [position the cursor] (
+  [row and column coordinates] DOMAIN [1..25 for row, 1..80 for column]
+  ) PROMISES [cursor moved to new position] RETURNS VOID
+
+Even though the above function returns VOID data, it still performs a useful operation with a
+side effect. This side effect should be documented.
+
+The range of a function is the set of legal values of its output. This range may be constrained,
+and such constraints are to be documented here. For example,
+
+FUNCTION [generate a random die roll] (VOID)
+  RETURNS [an integer] RANGE [in the range 1..6]
+
+The function body is where the function does the actual work. Here it manipulates its parameters
+and calculates its results. Also it is here where the function performs any side effects.
+
+The body is written by using English phrases which describe specific actions, together with
+control structures which describe how those actions are to be sequenced. Note also that it is
+acceptable in this p-code to nest function definitions and data definitions inside the body as
+well.
+
+
+Type Descriptions
+-----------------
+
+Data is described as a type. In a high level language, you typically define both types and
+objects. Because of the nature of p-code, however, data objects do not (normally) need to be
+explicitly named. The English phrases can usually be worded to make such names superfluous. In
+fact, if you find yourself wanting to name a data object in p-code it may mean that you are not
+thinking about a properly general design.
+
+Type descriptions take the form shown below.
+
+TYPE [name of type] IS [type descriptor]
+
+where a type descriptor is something like:
+
+     [simple description of type] : [domain constraint description]
+or
+     [aggregate specifier] OF [type descriptor list] END
+
+where a type descriptor list is a comma separated list of type descriptors.
+
+Types are inherently recursively defined. This is necessary. Also notice that once a type has
+been described, it can be used freely as a type descriptor. This is important if the p-code is
+to handle abstract data types.
+
+Consider the following simple (ie non aggregate) type descriptions
+
+TYPE [user ID number] IS [some kind of integer] : [range 0 to whatever]
+TYPE [date] IS [stores calendar dates] : [only back to 1800]
+TYPE [pen color] IS [an enumeration]
+
+Simple descriptions can be used to describe aggregates if you don't desire to spell out the
+detailed structure of an aggregate. Otherwise an aggregate specifier can be used.
+
+Many types are really aggregates of simple types. The OF clause allows you to specify the nature
+of the aggregate. For example
+
+TYPE [list of filenames] IS [list] OF [just strings] END
+
+Here is how you might specify a list of record (or structure) objects.
+
+TYPE [list of filenames] IS [list] OF
+  [a string for the name itself] : [can't hold path>,
+  [size in bytes]                : [must be able to handle large files!],
+  [date and time of last modification]
+END
+
+TYPE [registers of calculator] IS [stack] OF [numbers] END
+
+TYPE [error table] IS [record] OF ...
+
+Note that the END keyword is required if the OF keyword is used.

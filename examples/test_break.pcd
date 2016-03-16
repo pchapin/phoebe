@@ -1,0 +1,13 @@
+
+[this pseudo-program tests the handling of BREAK and CONTINUE]
+WHILE [there is more work] LOOP
+  WHILE [there is inner work] LOOP
+    IF [error condition] THEN BREAK END
+    IF [ignorable error] THEN CONTINUE END
+    IF [strange condition] THEN [normal case] ELSE BREAK END
+    [inside inner loop]
+  END
+  [inside outer loop]
+END
+[This is at the end of the outer loop]
+BREAK
