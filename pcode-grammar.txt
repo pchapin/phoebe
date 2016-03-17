@@ -1,14 +1,10 @@
 
 P-Code Grammar
-(C) Copyright 2005 by Peter Chapin
-Last Revised: 2005-05-15
-==================================
+==============
 
 This file contains a summary of the p-code grammar. Uppercase symbols and characters enclosed in
 single quotation marks are tokens. lowercase symbols are non-terminals. The start symbol is the
-first non-terminal in this file. The syntax used here is basically that of yacc. Note: This file
-is intended to be an easy to read reference. However, it is the grammar in pcode.y that actually
-defines what the program does.
+first non-terminal in this file. Note: This file is intended to be an easy to read reference.
 
 program:
      declare_block function_list
@@ -47,7 +43,7 @@ function_list:
 
 function:
      FUNCTION function_header '(' param_list ')'
-       result_clause pBEGIN statement_list END
+       result_clause BEGIN statement_list END
    ;
 
 function_header:

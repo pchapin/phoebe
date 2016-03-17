@@ -1,8 +1,4 @@
-grammar Phoebe;
-
-@parser::header {
-    package edu.vtc.phoebe;
-}
+lexer grammar PhoebeLexer;
 
 @lexer::header {
     package edu.vtc.phoebe;
@@ -13,8 +9,7 @@ grammar Phoebe;
 /* Grammar */
 /* ======= */
 
-program
-    :   BEGIN END;
+// No grammar rules allowed!
 
 /* =========== */
 /* Lexer rules */
@@ -55,14 +50,12 @@ UNTIL    : 'UNTIL';
 VOID     : 'VOID';
 WHILE    : 'WHILE';
 
-// Various operator symbols.
-DIVIDE   : '/';
-MINUS    : '-';
-MULTIPLY : '*';
-PLUS     : '+';
 
 IDENTIFIER
     :   [a-zA-Z][a-zA-Z0-9_]*;
+
+EP
+    :   '[' .*? ']';
 
 WHITESPACE
     :   [ \t\f\r\n]+  -> skip;

@@ -15,15 +15,12 @@ object Main {
     // Create a stream that reads from the specified file.
     val input = new ANTLRFileStream(args(0))
 
-    // Parse the input file as Ada.
+    // Tokenize the input file.
     val lexer  = new PhoebeLexer(input)
     val tokens = new CommonTokenStream(lexer)
-    val parser = new PhoebeParser(tokens)
-    val tree   = parser.program
+    tokens.fill()
 
-    // Do nothing more (semantic analysis is all that is necessary).
-    val parseTree = tree.toStringTree(parser)
-    println("*** AST ==> " + parseTree + "\n")
+    val tokenList = tokens.getTokens
   }
 
 }
