@@ -6,6 +6,8 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker
 object Main {
 
   def main(args: Array[String]): Unit = {
+    import scala.collection.JavaConverters._
+
     // Analyze the command line.
     if (args.length != 1) {
       println("Usage: java -jar Phoebe.jar source-file.pcd")
@@ -21,6 +23,26 @@ object Main {
     tokens.fill()
 
     val tokenList = tokens.getTokens
+    val scalaTokenList: List[Token] = tokenList.asScala.toList
+    val parseTree = parse(scalaTokenList)
+    println("Parse Tree: " + parseTree)
+  }
+
+  // TODO: Finish me!
+  def parse(tokenList: List[Token]): TreeNode.StatementListNode = {
+    import TreeNode._
+
+    def statement_list(tokenList: List[Token]): (List[Token], TreeNode.StatementListNode) = {
+      // TODO: Fix me!
+      (tokenList, StatementListPassThrough(EPStatement("Hello, World!")))
+    }
+
+    // Start things off by calling the start symbol.
+    val (remainingTokens, finalTree) = statement_list(tokenList)
+    if (remainingTokens.nonEmpty) {
+      // TODO: Handle the error! Unprocessed tokens at the end of input.
+    }
+    finalTree
   }
 
 }

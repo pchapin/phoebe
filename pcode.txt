@@ -368,7 +368,7 @@ TYPE [list of filenames] IS [list] OF [just strings] END
 Here is how you might specify a list of record (or structure) objects.
 
 TYPE [list of filenames] IS [list] OF
-  [a string for the name itself] : [can't hold path>,
+  [a string for the name itself] : [can't hold path],
   [size in bytes]                : [must be able to handle large files!],
   [date and time of last modification]
 END
