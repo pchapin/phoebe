@@ -3,7 +3,7 @@
 #
 
 # Short sequences are already sorted.
-IF [the sequence has two or fewer items] THEN RETURN END
+IF [the sequence has one or fewer items] THEN RETURN END
 
 REPEAT
   [set the "done swap" flag to NO]
