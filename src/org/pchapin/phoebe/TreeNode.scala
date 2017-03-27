@@ -1,4 +1,4 @@
-package edu.vtc.phoebe
+package org.pchapin.phoebe
 
 object TreeNode {
 

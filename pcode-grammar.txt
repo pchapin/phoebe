@@ -5,6 +5,7 @@ P-Code Grammar
 This file contains a summary of the p-code grammar. Uppercase symbols and characters enclosed in
 single quotation marks are tokens. lowercase symbols are non-terminals. The start symbol is the
 first non-terminal in this file. Note: This file is intended to be an easy to read reference.
+As usual, this grammar may or may not be suitable for building an implementation.
 
 program:
      declare_block function_list

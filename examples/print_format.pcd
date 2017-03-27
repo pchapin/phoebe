@@ -19,10 +19,10 @@
 #
 ##########################################################################
 
-FUNCTION [main](VOID) RETURNS int
+FUNCTION [main](VOID) RETURNS [int]
   BEGIN
   
-    # The following define some of the siginificant data objects needed in this program.
+    # The following define some of the significant data objects needed in this program.
     [Initialize:
        Page_Number   = 1 (Page we are currently printing on)
        Column_Number = 1 (Column position that we are about to use)

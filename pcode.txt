@@ -15,7 +15,7 @@ P-code is an excellent software design tool. It allows you to develop a program'
 getting bogged down in detail; yet it gives your design a form that resembles a program, making
 it easier to implement your design than is the case when using other, graphical techniques
 
-The p-code described in this document was developed by myself. It was developed to primarly
+The p-code described in this document was developed by myself. It was developed to primarily
 support C/C++ programming; however, it could easily be used to support other languages as well.
 The influence of Ada on the design is apparent.
 
@@ -41,7 +41,7 @@ For example,
 Each of the phrases above is informative and descriptive, but does not require the writer to
 worry about the specifics of the operation suggested. This p-code allows English phrases to be
 as large as necessary, perhaps spanning several lines, as long as they do not contain the ']'
-character anywhere in their text. Notice that we recommend starting an English phrase with a
+character anywhere in their text. Notice that I recommend starting an English phrase with a
 lower case letter. This tends to read better in the larger context where the first letter in the
 sentence is really a reserved word (such as "IF" above).
 
@@ -161,7 +161,7 @@ user.
 Notice that the REPEAT..UNTIL loop runs as long as the condition being tested is false. This is
 the opposite of the WHILE loop.
 
-The SWITCH construction is used to specify a multiway branch in a manner that is easier to read
+The SWITCH construction is used to specify a multi-way branch in a manner that is easier to read
 than an IF ... ELSE IF... chain. The word DEFAULT can be used to specify actions that are taken
 if none of the cases match.
 
@@ -183,7 +183,7 @@ however, since the English phrases used with the cases can be as complicated as 
 example
 
      SWITCH [key stroke entered by user]
-       CASE [upper or lower case leter]:
+       CASE [upper or lower case letter]:
          [handle letter]
          END
        CASE [digit]:
@@ -285,9 +285,9 @@ use other techniques for transmitting the parameters (for example global variabl
 The special parameter of VOID may be used to indicate that the function has no parameters.
 
 A function parameter and a type description may have domain constraints. These are descriptions
-of the set of legal values the parameter or type may have. The syntax for domain contraints on
+of the set of legal values the parameter or type may have. The syntax for domain constraints on
 types does not use the DOMAIN keyword since the term "domain" is more commonly associated with
-functions. However, the meaning of the contraints in both cases are similar.
+functions. However, the meaning of the constraints in both cases are similar.
 
 TYPE [day of the week] IS [some kind of enumeration] : [no weekends]
 

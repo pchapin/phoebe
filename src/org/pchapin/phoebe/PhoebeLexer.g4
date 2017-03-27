@@ -1,7 +1,7 @@
 lexer grammar PhoebeLexer;
 
 @lexer::header {
-    package edu.vtc.phoebe;
+    package org.pchapin.phoebe;
 }
 
 
