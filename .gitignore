@@ -15,3 +15,10 @@ src/org/pchapin/phoebe/PhoebeVisitor.java
 
 # Downloaded libraries.
 lib/*.jar
+
+# C artifacts
+*.o
+C/lex.yy.c
+C/pcode.tab.h
+C/pcode.tab.c
+C/main
