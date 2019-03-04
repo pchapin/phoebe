@@ -4,14 +4,7 @@ build
 .idea/workspace.xml
 
 # ANTLR artifacts.
-src/org/pchapin/phoebe/Phoebe.tokens
-src/org/pchapin/phoebe/PhoebeBaseListener.java
-src/org/pchapin/phoebe/PhoebeBaseVisitor.java
-src/org/pchapin/phoebe/PhoebeLexer.java
-src/org/pchapin/phoebe/PhoebeLexer.tokens
-src/org/pchapin/phoebe/PhoebeListener.java
-src/org/pchapin/phoebe/PhoebeParser.java
-src/org/pchapin/phoebe/PhoebeVisitor.java
+gen
 
 # Downloaded libraries.
 lib/*.jar
