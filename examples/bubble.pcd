@@ -15,4 +15,4 @@ REPEAT
     END
     [advance to the next two items (overlapping with the last iteration)]
   END
-UNTIL [the "done swap" flag is still NO"]
+UNTIL [the "done swap" flag is still NO]
