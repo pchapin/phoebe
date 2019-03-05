@@ -1,9 +1,8 @@
 lexer grammar PhoebeLexer;
 
-@lexer::header {
-    package org.pchapin.phoebe;
-}
-
+//@lexer::header {
+//    package org.pchapin.phoebe;
+//}
 
 /* ======= */
 /* Grammar */

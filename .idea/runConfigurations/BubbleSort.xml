@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="BubbleSort" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="org.pchapin.phoebe.Main" />
+    <module name="Phoebe" />
+    <option name="PROGRAM_PARAMETERS" value="examples\bubble.pcd" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
