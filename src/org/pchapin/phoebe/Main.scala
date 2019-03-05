@@ -14,7 +14,7 @@ object Main {
     }
 
     // Create a stream that reads from the specified file.
-    val input = new ANTLRFileStream(args(0))
+    val input = CharStreams.fromFileName(args(0))
 
     // Tokenize the input file.
     val lexer  = new PhoebeLexer(input)
@@ -23,64 +23,80 @@ object Main {
 
     val tokenList = tokens.getTokens
     val scalaTokenList: List[Token] = tokenList.asScala.toList
-    val parseTree = parse(scalaTokenList)
-    println("Parse Tree: " + parseTree)
+    val (messages, parseTree) = parse(scalaTokenList)
+    println("Messages:\n" + messages.reverse)
+    println("\nParse Tree:\n" + parseTree)
   }
 
-  // TODO: Finish me!
-  def parse(tokenList: List[Token]): TreeNode.StatementListNode = {
-    import TreeNode._
 
-    def statement_list(tokenList: List[Token]): (List[Token], StatementListNode) = {
+  // TODO: Finish me!
+  def parse(tokenList: List[Token]): (List[String], TreeNode.StatementListNode) = {
+    import TreeNode._
+    type TokenListType = List[Token]
+    type MessageListType = List[String]
+
+
+    def statement_list(tokenList: TokenListType, messages: MessageListType):
+      (TokenListType, MessageListType, StatementListNode) = {
+
       // TODO: Fix me!
-      (tokenList, StatementListPassThrough(EPStatement("Hello, World!")))
+      (tokenList, messages, StatementListPassThrough(EPStatement("Hello, World!")))
     }
 
-    def statement(tokenList: List[Token]): (List[Token], StatementNode) = {
+
+    def statement(tokenList: TokenListType, messages: MessageListType):
+      (TokenListType, MessageListType, StatementNode) = {
+
       // What kind of statement are we dealing with?
       tokenList.head.getType match {
         case PhoebeLexer.WHILE =>
-          val (afterConditional, conditionalExpression) = conditional_expr(tokenList.drop(1))
-          if (afterConditional.head.getType != PhoebeLexer.LOOP) {
-            // Unexpected token where LOOP was expected.
-            // TODO: Produce useful error message and improve error recovery.
-            (afterConditional.drop(1),
-              WhileStatement(conditionalExpression, StatementListPassThrough(EPStatement("BAD TOKEN"))))
+          val (afterConditionalTokens, afterConditionalMessages, conditionalExpression) =
+            conditional_expr(tokenList.drop(1), messages)
+
+          if (afterConditionalTokens.head.getType != PhoebeLexer.LOOP) {
+            (afterConditionalTokens,
+              "Unexpected token where LOOP was expected" :: afterConditionalMessages,
+              WhileStatement(conditionalExpression, StatementListPassThrough(EPStatement("NULL BODY"))))
           }
           else {
-            val (afterStatements, statementList) = statement_list(afterConditional.drop(1))
-            if (afterStatements.head.getType != PhoebeLexer.END) {
-              // Unexpected token where END was expected.
-              // TODO: Produce useful error message and improve error recovery.
-              (afterStatements.drop(1),
+            val (afterStatementsTokens, afterStatementsMessages, statementList) =
+              statement_list(afterConditionalTokens.drop(1), afterConditionalMessages)
+
+            if (afterStatementsTokens.head.getType != PhoebeLexer.END) {
+              (afterStatementsTokens,
+                "Unexpected token where END was expected" :: afterStatementsMessages,
                 WhileStatement(conditionalExpression, statementList))
             }
             else {
-              (afterStatements.drop(1),
+              (afterStatementsTokens.drop(1),
+                afterStatementsMessages,
                 WhileStatement(conditionalExpression, statementList))
             }
           }
 
         case _ =>
-          // Unrecognized or unsupported token found.
-          // TODO: Produce useful error message and improve error recovery.
-          (tokenList.drop(1), EPStatement("BAD TOKEN"))
+          val badToken = tokenList.head
+          (tokenList.drop(1),
+            "Unrecognized or unsupported token found" :: messages,
+            EPStatement("BAD TOKEN: " + badToken.getText))
       }
     }
 
-    def conditional_expr(tokenList: List[Token]): (List[Token], ConditionalExpressionNode) = {
+
+    def conditional_expr(tokenList: TokenListType, messages: MessageListType):
+      (TokenListType, MessageListType, ConditionalExpressionNode) = {
+
       // TODO: Fix me!
-      (tokenList,
-        ConditionalPassThroughExpression(AndPassThroughExpression(SimpleEPExpression(EPNode("Hi")))))
+      (tokenList, messages, ConditionalPassThroughExpression(AndPassThroughExpression(SimpleEPExpression(EPNode("Hi")))))
     }
 
-    // Start things off by calling the start symbol.
-    val (remainingTokens, finalTree) = statement_list(tokenList)
-    if (remainingTokens.nonEmpty) {
-      // Unprocessed tokens at the end of input.
-      // TODO: Produce useful error message.
-    }
-    finalTree
+
+    // Calling the start symbol and return the results.
+    val (finalTokens, finalMessages, finalTree) = statement_list(tokenList, List())
+    if (finalTokens.nonEmpty)
+      ("Unprocessed tokens at end of input" :: finalMessages, finalTree)
+    else
+      (finalMessages, finalTree)
   }
 
 }
