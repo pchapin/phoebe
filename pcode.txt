@@ -21,7 +21,7 @@ The influence of Ada on the design is apparent.
 
 Although this p-code supports ways of defining both procedures and data, it does not (directly)
 support package level modularity, exception handling, concurrency, abstract data types, or
-object oriented programming. The syntax could be extended on the fly to accommodate some of
+object-oriented programming. The syntax could be extended on the fly to accommodate some of
 these things. However, it is my feeling that other design techniques may be more appropriate for
 these other levels of software. P-code is best suited for describing the logic of individual
 functions or procedures.
@@ -63,7 +63,7 @@ of the function can be deferred by using an English phrase as a description of t
        UNTIL [no swapping is necessary]
      END
 
-P-code does not deal with data types. Instead it deals with descriptions of data items.
+P-code does not deal with data types. Instead, it deals with descriptions of data items.
 Defining and using appropriate data types is a matter for the implementation of a p-coded
 routine.
 
@@ -79,7 +79,7 @@ The function body of a p-code program is written using the following control str
      * REPEAT ... UNTIL ...
      * SWITCH ... CASE ..., etc
 
-Also the BREAK and CONTINUE statements can be used to control loop iterations. You may notice
+Also, the BREAK and CONTINUE statements can be used to control loop iterations. You may notice
 that these structures are based on the C language. However, the p-code developed here can be
 used effectively for a variety of languages. Also, since p-code is not a computer language,
 there is no real prohibition against making up your own control structures on the fly. For
@@ -295,7 +295,7 @@ FUNCTION [position the cursor] (
   [row and column coordinates] DOMAIN [1..25 for row, 1..80 for column]
   ) RETURNS VOID
 
-Many data structures have rules that always apply to them (sometimes called "invarients"). These
+Many data structures have rules that always apply to them (sometimes called "invariants"). These
 rules can be expressed as domain constraints as well. For example,
 
 TYPE [list of file names] IS [list] OF [just strings] :
@@ -318,7 +318,7 @@ FUNCTION [generate a random die roll] (VOID)
   RETURNS [an integer] RANGE [in the range 1..6]
 
 The function body is where the function does the actual work. Here it manipulates its parameters
-and calculates its results. Also it is here where the function performs any side effects.
+and calculates its results. Also, it is here where the function performs any side effects.
 
 The body is written by using English phrases which describe specific actions, together with
 control structures which describe how those actions are to be sequenced. Note also that it is
@@ -351,14 +351,14 @@ Types are inherently recursively defined. This is necessary. Also notice that on
 been described, it can be used freely as a type descriptor. This is important if the p-code is
 to handle abstract data types.
 
-Consider the following simple (ie non aggregate) type descriptions
+Consider the following simple (ie non-aggregate) type descriptions
 
 TYPE [user ID number] IS [some kind of integer] : [range 0 to whatever]
 TYPE [date] IS [stores calendar dates] : [only back to 1800]
 TYPE [pen color] IS [an enumeration]
 
 Simple descriptions can be used to describe aggregates if you don't desire to spell out the
-detailed structure of an aggregate. Otherwise an aggregate specifier can be used.
+detailed structure of an aggregate. Otherwise, an aggregate specifier can be used.
 
 Many types are really aggregates of simple types. The OF clause allows you to specify the nature
 of the aggregate. For example

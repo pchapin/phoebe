@@ -1,0 +1,22 @@
+<component name="libraryTable">
+  <library name="scalatest.scalatest_2.13" type="repository">
+    <properties maven-id="org.scalatest:scalatest_2.13:3.1.0" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/scalatest_2.13-3.1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/scala-library-2.13.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/scalatest-compatible-3.1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/scalactic_2.13-3.1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/scala-reflect-2.13.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/scala-xml_2.13-1.2.0.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/lib/scalatest_2.13-3.1.0-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/scala-library-2.13.1-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/scalatest-compatible-3.1.0-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/scalactic_2.13-3.1.0-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/scala-reflect-2.13.1-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/scala-xml_2.13-1.2.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES />
+  </library>
+</component>
