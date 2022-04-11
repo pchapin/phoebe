@@ -5,7 +5,7 @@ import org.antlr.v4.runtime._
 object Main {
 
   def main(args: Array[String]): Unit = {
-    import scala.collection.JavaConverters._
+    import scala.jdk.CollectionConverters._
 
     // Analyze the command line.
     if (args.length != 1) {
@@ -22,15 +22,14 @@ object Main {
     tokens.fill()
 
     val tokenList = tokens.getTokens
-    val scalaTokenList: List[Token] = tokenList.asScala.toList
+    val scalaTokenList = tokenList.asScala.toList
     val (messages, parseTree) = parse(scalaTokenList)
     println("Messages:\n" + messages.reverse)
     println("\nParse Tree:\n" + parseTree)
   }
 
 
-  // TODO: Finish me!
-  def parse(tokenList: List[Token]): (List[String], TreeNode.StatementListNode) = {
+  private def parse(tokenList: List[Token]): (List[String], TreeNode.StatementListNode) = {
     import TreeNode._
     type TokenListType = List[Token]
     type MessageListType = List[String]
@@ -39,7 +38,7 @@ object Main {
     def statement_list(tokenList: TokenListType, messages: MessageListType):
       (TokenListType, MessageListType, StatementListNode) = {
 
-      // TODO: Fix me!
+      // TODO: Finish me!
       (tokenList, messages, StatementListPassThrough(EPStatement("Hello, World!")))
     }
 
@@ -48,6 +47,7 @@ object Main {
       (TokenListType, MessageListType, StatementNode) = {
 
       // What kind of statement are we dealing with?
+      // The WHILE statement is done as an example.
       tokenList.head.getType match {
         case PhoebeLexer.WHILE =>
           val (afterConditionalTokens, afterConditionalMessages, conditionalExpression) =
@@ -74,6 +74,8 @@ object Main {
             }
           }
 
+        // TODO: Finish me!
+
         case _ =>
           val badToken = tokenList.head
           (tokenList.drop(1),
@@ -86,7 +88,7 @@ object Main {
     def conditional_expr(tokenList: TokenListType, messages: MessageListType):
       (TokenListType, MessageListType, ConditionalExpressionNode) = {
 
-      // TODO: Fix me!
+      // TODO: Finish me!
       (tokenList, messages, ConditionalPassThroughExpression(AndPassThroughExpression(SimpleEPExpression(EPNode("Hi")))))
     }
 

@@ -256,10 +256,10 @@ Functions
 
 Although this p-code is very useful without the formality of creating function definitions there
 are times when a p-code programmer would like to clearly document function interfaces.
-Accordingly this p-code provides a way to do this. Below is a sample function specification
-showing all of the features supported by this pseudo-code. Note that, as with the C language,
-this p-code uses the word FUNCTION to describe any kind of callable block of code. Because of
-the flexibility of p-code, there is no problem using p-code functions to describe procedures or
+Accordingly, this p-code provides a way to do this. Below is a sample function specification
+showing all the features supported by this pseudo-code. Note that, as with the C language, this
+p-code uses the word FUNCTION to describe any kind of callable block of code. Because of the
+flexibility of p-code, there is no problem using p-code functions to describe procedures or
 methods in languages that support those concepts.
 
 FUNCTION [name of function] REQUIRES [precondition] (
